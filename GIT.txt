@@ -1,0 +1,166 @@
+git init //initiate a git repository
+
+//create  phone.txt and write something
+
+git status // gives the status,
+// this says there is a modified filed but u havent taken any snapshot(what all changes done)
+
+git add phone.txt //this command add those changes in files as a snapshot toknow what are changed, this particullary does only for phone.txt
+
+git commit -m 'create phone' // this commit takes those changed snapshot into a anme called "create phone"
+
+
+//again make some changes in phone file
+//again do git status, it will again show phone.txt.  for what all changes made we can use "git diff"
+
+git add . // this adds everyting which is there in that path.
+
+git commit -m 'add touchscreen'
+
+git log//this gives what all changes we have made like create phone, add touchscreen
+
+git checkout <enter logid here> // this is to know what we make changes in paticular commits
+
+//when we do above checkout we get head moved to commits id,
+//if we give create phone id it moves to that and shows changes in that file.
+//if we gibe add touchscreen id it moves to that and shows changes in that file.
+
+
+//BUT IF we do commit again it wil create one more head refernce.
+
+
+BRANCHES:
+
+		c(internet)------------
+		|(branch)	
+		|
+a(phone)--------b(touch screen)-----------------------------------------------------------------master
+		|
+		|(branch)
+		d(music player)--------
+
+
+git checkout -b internet //its creating a new branch with name "internet" from 'touch screen', simply as git branch "branchname"[this is creating] and git switch "branchname"
+//we create file internet.txt and add txt as internet added
+//we do add and then commit as "add internet"
+//go back to master by "git checkout master"
+
+git checkout -b music_palyer
+//we create file musicplayer.txt and add txt as music album added
+//we do add and then commit as "create music ablum"
+//go back to master by "git checkout master"
+
+
+
+MERGING:
+// i for insert
+//:wq [save and exit]
+
+before merging lets do one more commit in master branch , lets add fingerprint feature. and then merge the internet with master and then merge music playter with master
+
+		c(internet)--------------------------------------
+		|(branch)					|
+		|						|
+a(phone)--------b(touch screen)------------e(finger print)--(a,b,c,e)--(a,d,c,d,e)------------------------------------------------master
+		|							|
+		|(branch)						|
+		d(music player)------------------------------------------
+
+git merge internet//merging internet branch with master or we can even write as [git commit -m Merge branch 'internet']
+
+git merge music_player
+
+//NOTE AFTER ALL THIS MERGING WE CAN DELETE "internet" and "music_player" branch to save space
+delete:
+
+git branch -d internet
+git branch -d music_palyer
+
+
+
+
+
+
+CONFLICTS IN MERGING AND SOL FOR THAT:
+//lets craete a app and further create branch for them 
+
+
+
+		c(internet)--------------------------------------			g(game)----------
+		|(branch)					|			|		|
+		|						|			|		|
+a(phone)--------b(touch screen)------------e(finger print)--(a,b,c,e)--(a,d,c,d,e)-----f(apps)--------(a->g)----(a->h)------------master
+		|							|		|			|
+		|(branch)						|		|			|
+		d(music player)------------------------------------------		h(movies)----------------
+
+
+//when we create game branch we modihy both game.txt and apps.txt, by giving name of the game app in apps.txt and adding some txt in game.txt file
+
+//when we create movies branch we modify both movies.txt and apps.txt, by giving name of the movie app in apps.txt and adding some txt in movies.txt file
+
+//now merge
+
+//when merging movies to master we get conflict bcoz line1 of apps.txt in game -> is conflicting with -> line1 of apps.txt in movies
+//so we need to make changes to apps.txt and then need to commit for changes
+//git add .
+//git commit //here it automatically commits as "meger movies"
+
+----------------------------------------------------------------------------------------
+GIT WORKFLOWS:										    testing production				production server
+												---------				---------
+//above phone workflow is followed by small teams but large org do as below			|	|				|	|
+										--------------->|	|			------->|	|
+										|						|						
+										|						|
+		     feature1------------      feature3----------		|						|
+			|		|	|		|		|						|
+			|		|	|		|		|						|
+    development branch----------------------------------^------------------>----^----------dev branch-----------^--->		|
+	|			|			|			   |		  	also should merge 	|	
+	|			|			|	     then merge	   |    	      hotfix to dev branch	|
+	|			|			|	     to main master|				|		|
+--------^-------------------------------------------------------------------------------------------------------^---------------------main master--------
+				|			|					|		|
+				|			|					|		|
+			     feature2--------------------					------hot fix----
+
+
+
+
+
+
+
+
+------------------------------------
+GIT HUB:
+
+to push our local repo master to remote repo.
+initially its better to setuo the config username and password, so that we know who pushed it.
+
+git config user.name 'govardhan-kl'
+git config user.email 'klgovardhan87@gmail.com'
+
+then copy the remote repo link and enter 
+and do git push -u origin master
+
+--->and added to https://github.com/govardhan-kl/git_it
+
+//above only pushes master branch, to get all branches u need to go to each branch and push it.
+
+--------------------------------------------------------
+GIT HUB with team member
+
+git clone https://github.com/govardhan-kl/git_it.git
+
+
+// above command only shows master branch when we do [git branch] //the head will be pointing to master
+// to see all branches [git branch -r] 
+
+// to navigate to other branches and activate// we can use git checkout <branch name>
+
+//then further the person can use it and create branches and can commit
+
+//then he further cannot push it to my remote repo, bcoz the govardhan has to put other person as a collabrator. then he can push the commited changes
+
+
