@@ -1,3 +1,3 @@
 # git_it
 learning git on my own
-this is just a steps for how git and github works
+this is just a steps for how to use git and github works
