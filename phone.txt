@@ -2,3 +2,4 @@ phone
 
 touchscreen
 scratchless gorill-glass
+fingerprint
